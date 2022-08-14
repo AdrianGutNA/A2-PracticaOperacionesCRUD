@@ -1,5 +1,5 @@
-<%@page import="beans.Alumno"%>
-<%@page import="dao.DAOAlumno"%>
+<%@page import="beans.Porcentaje"%>
+<%@page import="dao.DAOPorcentaje"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -42,39 +42,22 @@
                 </div>
                 <div class="col-7">
                     <%
-                        DAOAlumno dao = new DAOAlumno();
-                        String matricula = request.getAttribute("matricula").toString();
-                        Alumno alumno = dao.buscar(matricula);
+                        DAOPorcentaje dao = new DAOPorcentaje();
+                        String id =  request.getAttribute("id").toString();
+                        Porcentaje porcentaje = dao.buscar(id);
                     %>
                     <form action="SAlumnos" method="POST">
                         <div class="form-group">
-                            <label>Matricula</label>
-                            <input type="text"   class="form-control" name="tfMatricula" value="<%=alumno.getMatricula()%>"> 
+                            <label>Descripción</label>
+                            <input type="text"   class="form-control" name="tfDescripcion" value="<%=porcentaje.getDescripcion()%>"> 
                         </div>
                         <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text"   class="form-control" name="tfNombre" value="<%=alumno.getNombre()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>Apellidos</label>
-                            <input type="text"   class="form-control" name="tfApellidos" id="inputApellidos" value="<%=alumno.getApellidos()%>">
+                            <label>Porcentaje</label>
+                            <input type="number" class="form-control" name="tfPorcentaje" id="inputEcbd" value="<%=porcentaje.getPorcentaje()%>">
 
-                        </div>
-                        <div class="form-group">
-                            <label>DDI</label>
-                            <input type="number" class="form-control" name="tfDdi" id="inputddi" value="<%=alumno.getDdi()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>DWI</label>
-                            <input type="number" class="form-control" name="tfDwi" id="inputdwi" value="<%=alumno.getDwi()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>ECBD</label>
-                            <input type="number" class="form-control" name="tfEcbd" id="inputEcbd" value="<%=alumno.getEcbd()%>">
-
-                            <input type="hidden" class="form-control" name="tfMatriculaOld" id="inputMatri" value="<%=alumno.getMatricula()%>">
+                            <input type="hidden" name="tfIdOld" value="<%=id%>">
                         </div>                       
-                        <button type="submit" name="accion" value="Actualizar" class="btn btn-primary btnGuardar">Editar</button>
+                        <button type="submit" name="accion" value="actualizarPorcentaje" class="btn btn-primary btnGuardar">Editar</button>
                     </form>
                 </div>
             </div>

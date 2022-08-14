@@ -1,8 +1,11 @@
 package servlets;
 
 import beans.Alumno;
+import beans.Porcentaje;
+
 
 import dao.DAOAlumno;
+import dao.DAOPorcentaje;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -29,7 +32,9 @@ public class SAlumnos extends HttpServlet
     private Alumno alumno;
     private DAOAlumno daoAlumno;
     
-
+    private Porcentaje porcentaje;
+    private DAOPorcentaje daoPorcentaje;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException  
     {
@@ -108,45 +113,60 @@ public class SAlumnos extends HttpServlet
        }
        else if(accion!=null && accion.equalsIgnoreCase("agregarPorcentaje"))
        {
-           alumno = new Alumno();
-           alumno.setMatricula(request.getParameter("tfMatricula"));
-           alumno.setNombre(request.getParameter("tfNombre"));
-           alumno.setApellidos(request.getParameter("tfApellidos"));
-           alumno.setDdi(Integer.parseInt(request.getParameter("tfDdi")));
-           alumno.setDwi(Integer.parseInt(request.getParameter("tfDwi")));
-           alumno.setEcbd(Integer.parseInt(request.getParameter("tfEcbd")));
+           porcentaje = new Porcentaje();
+           porcentaje.setDescripcion(request.getParameter("tfDescripcion"));
+           porcentaje.setPorcentaje(Integer.parseInt(request.getParameter("tfPorcentaje")));
            
-           daoAlumno = new DAOAlumno();
-           daoAlumno.agregar(alumno);
+           daoPorcentaje = new DAOPorcentaje();
+           daoPorcentaje.agregar(porcentaje);
            
            acceso=mostrarPorcentaje;
            
        }
        else if(accion!=null && accion.equalsIgnoreCase("editarPorcentaje"))
        {
-          request.setAttribute("matricula", request.getParameter("matricula"));
+          request.setAttribute("id", request.getParameter("id"));
           acceso=editarPorcentaje;
-       }else if(accion!=null && accion.equalsIgnoreCase("actualizar"))
+       }else if(accion!=null && accion.equalsIgnoreCase("actualizarPorcentaje"))
        {
-           alumno = new Alumno();
-           String matriculaOld=request.getParameter("tfMatriculaOld");
-           alumno.setMatricula(request.getParameter("tfMatricula"));
-           alumno.setNombre(request.getParameter("tfNombre"));
-           alumno.setApellidos(request.getParameter("tfApellidos"));
-           alumno.setDdi(Integer.parseInt(request.getParameter("tfDdi")));
-           alumno.setDwi(Integer.parseInt(request.getParameter("tfDwi")));
-           alumno.setEcbd(Integer.parseInt(request.getParameter("tfEcbd")));
+           porcentaje = new Porcentaje();
+           String idOld= request.getParameter("tfIdOld");
+           porcentaje.setDescripcion(request.getParameter("tfDescripcion"));
+           porcentaje.setPorcentaje(Integer.parseInt(request.getParameter("tfPorcentaje")));
            
-           daoAlumno = new DAOAlumno();
-           daoAlumno.editar(alumno, matriculaOld);
+           daoPorcentaje = new DAOPorcentaje();
+           daoPorcentaje.editar(porcentaje, idOld);
            acceso=mostrarPorcentaje;
+           
        }else if(accion!=null && accion.equalsIgnoreCase("eliminarPorcentaje"))
        {
-           String matricula=request.getParameter("matricula");
-           daoAlumno = new DAOAlumno();
-           daoAlumno.eliminar(matricula);
+           String id=request.getParameter("id");
+           daoPorcentaje = new DAOPorcentaje();
+           daoPorcentaje.eliminar(id);
            acceso=mostrarPorcentaje;
        }
+       else if(accion!=null && accion.equalsIgnoreCase("mostrarActividades"))//Actividades
+       {
+           acceso=mostrarPorcentaje;
+       }
+       else if
+               (accion!=null && accion.equalsIgnoreCase("nuevoPorcentaje"))
+       {
+           acceso=nuevoPorcentaje;
+       }
+       else if(accion!=null && accion.equalsIgnoreCase("agregarPorcentaje"))
+       {
+           porcentaje = new Porcentaje();
+           porcentaje.setDescripcion(request.getParameter("tfDescripcion"));
+           porcentaje.setPorcentaje(Integer.parseInt(request.getParameter("tfPorcentaje")));
+           
+           daoPorcentaje = new DAOPorcentaje();
+           daoPorcentaje.agregar(porcentaje);
+           
+           acceso=mostrarPorcentaje;
+           
+       }
+       
        else 
        {
            acceso=inicio;

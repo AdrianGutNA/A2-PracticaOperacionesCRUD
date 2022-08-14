@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="beans.Alumno"%>
+<%@page import="beans.Porcentaje"%>
 <%@page import="dao.DAOPorcentaje"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -54,17 +54,16 @@
                <tbody>
                 <%
                     DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
-                    ArrayList<Alumno> listAlumnos = daoPorcentaje.mostrar();
-                    Alumno alumno = null;
-                    for (int i = 0; i < listAlumnos.size(); i++) {
-                        alumno = listAlumnos.get(i);
-
+                    ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
+                    Porcentaje porcentaje = null;
+                    for (int i = 0; i < listPorcentajes.size(); i++) {
+                        porcentaje = listPorcentajes.get(i);
                 %>
                 <tr>
-                    <td><%=alumno.getMatricula()%></td>
-                    <td><%=alumno.promediar()%></td>
-                    <td><a class="btn btn-info" href="SAlumnos?accion=editarPorcentaje&matricula=<%=alumno.getMatricula()%>">Editar</a></td>
-                    <td><a class="btn btn-danger" href="SAlumnos?accion=eliminarPorcentaje&matricula=<%=alumno.getMatricula()%>">Eliminar</a></td>
+                    <td><%=porcentaje.getDescripcion()%></td>
+                    <td><%=porcentaje.getPorcentaje()%></td>
+                    <td><a class="btn btn-info" href="SAlumnos?accion=editarPorcentaje&id=<%=porcentaje.getId()%>">Editar</a></td>
+                    <td><a class="btn btn-danger" href="SAlumnos?accion=eliminarPorcentaje&id=<%=porcentaje.getId()%>">Eliminar</a></td>
                 </tr>
                 <% }%>
             </tbody>

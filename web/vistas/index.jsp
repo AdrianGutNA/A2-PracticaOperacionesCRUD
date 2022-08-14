@@ -48,7 +48,7 @@
                     </a>
                 </div>
                 <div class="col">
-                    <a href="#">
+                    <a href="SAlumnos?accion=mostrarActividades">
                         <div class="card cardEnlace" style="width: 14rem;">
                             <img src="./publico/img/libreta.jpg">
 

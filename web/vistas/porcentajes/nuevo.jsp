@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- CSS only -->
-        <title>Nuevo Alumno</title>
+        <title>Nuevo Porcentaje</title>
         
         <link rel="shortcut icon" href="./publico/img/libreta.ico" />
         <link rel="stylesheet" href="./publico/css/style.css">
@@ -21,7 +21,7 @@
                             <img src="./publico/img/icono.png">
                         </div>
                         <div class="col">
-                            <h5>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h5>
+                            <h5>Actidad 2 -Comunicacion entre JPS - Servlet - JSP</h5>
                         </div>       
                     </div>
                 </a>
@@ -42,31 +42,15 @@
                 <div class="col-7">
                     <form action="SAlumnos" method="POST">
                         <div class="form-group">
-                            <label>Matricula</label>
-                            <input type="text" class="form-control" name="tfMatricula">
+                            <label>Descripcion</label>
+                            <input type="text" class="form-control" name="tfDescripcion">
                         </div>
                         <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" class="form-control" name="tfNombre">
-                        </div>
-                        <div class="form-group">
-                            <label>Apellidos</label>
-                            <input type="text" class="form-control" name="tfApellidos">
-                        </div>
-                        <div class="form-group">
-                            <label>DDI</label>
-                            <input type="text" class="form-control" name="tfDdi">
-                        </div>
-                        <div class="form-group">
-                            <label>DWI</label>
-                            <input type="text" class="form-control" name="tfDwi">
-                        </div>
-                        <div class="form-group">
-                            <label>ECBD</label>
-                            <input type="text" class="form-control" name="tfEcbd">
+                            <label>Porcentaje</label>
+                            <input type="number" class="form-control" name="tfPorcentaje">
                         </div>
                                                 
-                        <button type="submit" name="accion" value="agregar" class="btn-fm btn-primary btnGuardar">Guardar</button>
+                        <button type="submit" name="accion" value="agregarPorcentaje" class="btn-fm btn-primary btnGuardar">Guardar</button>
                     </form>
                 </div>
             </div>
@@ -78,12 +62,12 @@
                         <img src="./publico/img/UTlogo.png">
                     </div>
                     <div class="col">
-                        <h4>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h4>
+                        <h4>Actidad 2 -Comunicacion entre JPS - Servlet - JSP</h4>
                     </div>       
                 </div>
 
                 <div id="lineaFooter"></div>
-                <p class="font-italic">actividad 5 - ©copyright</p>
+                <p class="font-italic">actividad 2 - ©copyright</p>
             </footer>
         </div>
     </body>

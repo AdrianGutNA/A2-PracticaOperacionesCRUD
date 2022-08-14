@@ -1,5 +1,5 @@
 package dao;
-import beans.Alumno;
+import beans.Porcentaje;
 import conexion.ConexionMySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,12 +12,12 @@ public class DAOPorcentaje
  private Connection con;
  private PreparedStatement ps;
  private ResultSet rs;
- private Alumno alumno;   
+ private Porcentaje porcentaje;   
  
  public ArrayList mostrar() 
  {
-  ArrayList<Alumno> list=new ArrayList<>();
-  String sql="SELECT * FROM alumnos";
+  ArrayList<Porcentaje> list=new ArrayList<>();
+  String sql="SELECT * FROM porcentajes";
   try
   {
       con=ConexionMySQL.getConnection();
@@ -25,15 +25,11 @@ public class DAOPorcentaje
       rs=ps.executeQuery();
       while(rs.next())
       {
-          alumno=new Alumno();
-          alumno.setMatricula(rs.getString("Matricula"));
-          alumno.setNombre(rs.getString("Nombre"));
-          alumno.setApellidos(rs.getString("Apellidos"));
-          alumno.setDdi(rs.getInt("Ddi"));
-          alumno.setDwi(rs.getInt("Dwi"));
-          alumno.setEcbd(rs.getInt("Ecbd"));
-          alumno.promediar();
-          list.add(alumno);
+          porcentaje=new Porcentaje();
+          porcentaje.setId(rs.getInt("Id"));
+          porcentaje.setDescripcion(rs.getString("Descripcion"));
+          porcentaje.setPorcentaje(rs.getInt("Porcentaje"));
+          list.add(porcentaje);
       }
       rs.close();
       ps.close();
@@ -42,16 +38,11 @@ public class DAOPorcentaje
   catch (SQLException e){ }
   return list; 
  }
- 
- public boolean agregar (Alumno alumno)  
+
+ public boolean agregar (Porcentaje porcentaje)  
  {
-   String sql = "INSERT INTO alumnos VALUES('"  +
-                 alumno.getMatricula()  + "'," + 
-           "'" + alumno.getNombre()     + "'," +
-           "'" + alumno.getApellidos()  + "'," +
-                 alumno.getDdi()        + ","  +
-                 alumno.getDwi()        + ","  +
-                 alumno.getEcbd()       + ")";
+   String sql = "INSERT INTO `porcentajes` (`id`, `descripcion`, `porcentaje`) VALUES (NULL, '" + 
+           porcentaje.getDescripcion() + "', '" + porcentaje.getPorcentaje() + "')";
    
    try
    {
@@ -63,18 +54,15 @@ public class DAOPorcentaje
    } catch (SQLException ex) { } 
    
    return true;          
- }       
+ }  
+
  
- public boolean editar(Alumno alumno, String old)
+ public boolean editar(Porcentaje porcentaje, String old)
  {
-     String sql="UPDATE alumnos SET " +
-            " Matricula  = '" + alumno.getMatricula()  + "',"  +
-            " Nombre     = '" + alumno.getNombre()     + "'," +
-            " Apellidos  = '" + alumno.getApellidos()  + "'," +
-            " Ddi        = "  + alumno.getDdi()        + ","  +
-            " Dwi        = "  + alumno.getDwi()        + ","  +
-            " Ecbd        = " + alumno.getEcbd()       +
-            " WHERE Matricula = '" + old + "'";
+     String sql= "UPDATE `porcentajes` SET "
+             + "`descripcion` = '"   + porcentaje.getDescripcion()  + 
+               "', `porcentaje` = '" + porcentaje.getPorcentaje()   + 
+               "' WHERE `porcentajes`.`id` = " + old;
      
      try
      {
@@ -89,9 +77,9 @@ public class DAOPorcentaje
      return true;
  }
  
- public boolean eliminar(String matricula)
+ public boolean eliminar(String id)
  {
-     String sql= "DELETE FROM alumnos WHERE Matricula ='" + matricula + "'";
+     String sql= "DELETE FROM porcentajes WHERE Id ='" + id + "'";
      
      try
      {
@@ -105,28 +93,24 @@ public class DAOPorcentaje
      return true;
  }
  
- public Alumno buscar(String matricula)
+ public Porcentaje buscar(String id)
     {
-        String sql="SELECT * FROM alumnos WHERE Matricula = '" + matricula + "'";
+        String sql="SELECT * FROM porcentajes WHERE id = '" + id + "'";
         try {
                 con=ConexionMySQL.getConnection();
                  ps=con.prepareStatement(sql);
                  rs=ps.executeQuery();
                 while (rs.next()) 
                 {
-                    alumno= new Alumno();
-                    alumno.setMatricula(rs.getString("Matricula"));
-                    alumno.setNombre(rs.getString("Nombre"));
-                    alumno.setApellidos(rs.getString("Apellidos"));
-                    alumno.setDdi(rs.getInt("Ddi"));
-                    alumno.setDwi(rs.getInt("Dwi"));
-                    alumno.setEcbd(rs.getInt("Ecbd"));
+                    porcentaje= new Porcentaje();
+                    porcentaje.setDescripcion(rs.getString("Descripcion"));
+                    porcentaje.setPorcentaje(rs.getInt("Porcentaje"));
 
                 }
                 rs.close();
                 ps.close();
                 con.close();
             }catch (SQLException e) {}
-        return alumno;
+        return porcentaje;
     }
 }

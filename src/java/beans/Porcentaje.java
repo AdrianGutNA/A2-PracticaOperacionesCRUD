@@ -1,18 +1,29 @@
 
 package beans;
 
-public class Porcentajes {
+public class Porcentaje {
     private String descripcion;
     private int porcentaje;
-    
-    public Porcentajes(){
-        descripcion = "";
-        porcentaje = 0;
+    private int id;
+
+    public int getId() {
+        return id;
     }
 
-    public Porcentajes(String descripcion, int porcentaje) {
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public Porcentaje(){
+        descripcion = "";
+        porcentaje = 0;
+        id = 0;
+    }
+
+    public Porcentaje(String descripcion, int porcentaje, int id) {
         this.descripcion = descripcion;
         this.porcentaje = porcentaje;
+        this.id = id;
     }
 
     public String getDescripcion() {
