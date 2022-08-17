@@ -1,6 +1,12 @@
 <%@page import="beans.Actividad"%>
 <%@page import="dao.DAOActividad"%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="beans.Porcentaje"%>
+<%@page import="dao.DAOPorcentaje"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -55,8 +61,22 @@
                         </div>
                         <div class="form-group">
                             <label>Categoria</label>
-                            <input type="text" class="form-control" name="tfCategoria" id="inputEcbd" value="<%=actividad.getCategoria()%>">
+                            
+                            <select name="tfCategoria" class="form-select" aria-label="Default select example">
+                                <option selected value="<%=actividad.getCategoria()%>"><%=actividad.getCategoria()%></option>
+                                <%
+                                DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
+                                ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
+                                Porcentaje porcentaje = null;
+                                for (int i = 0; i < listPorcentajes.size(); i++) {
+                                    porcentaje = listPorcentajes.get(i);
+                            %>
+                                <option value="<%=porcentaje.getDescripcion()%>"><%=porcentaje.getDescripcion()%></option>
 
+                            <% }%>
+                            
+                            </select>
+                            
                             <input type="hidden" class="form-control" name="tfIdOld" id="inputMatri" value="<%=id%>">
                         </div>                       
                         <button type="submit" name="accion" value="actualizarActividad" class="btn btn-primary btnGuardar">Editar</button>
