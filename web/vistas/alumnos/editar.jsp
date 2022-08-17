@@ -22,7 +22,7 @@
                             <img src="./publico/img/icono.png">
                         </div>
                         <div class="col">
-                            <h5>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h5>
+                            <h5>Actidad 2 - Operaciones CRUD - Alumnos</h5>
                         </div>       
                     </div>
                 </a>
@@ -37,8 +37,10 @@
 
                     <br>
 
-                    <a class="btn btn-dark btnAtras" href="SAlumnos">Regresar</a>
-
+                    <form action="SAlumnos" method="POST">                       
+                        <button type="submit" name="accion" value="regresarAlumno" class="btn btn-dark btnAtras">Regresar</button>
+                    </form>
+                    
                 </div>
                 <div class="col-7">
                     <%
@@ -86,12 +88,12 @@
                         <img src="./publico/img/UTlogo.png">
                     </div>
                     <div class="col">
-                        <h4>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h4>
+                        <h4>Actidad 2 - Operaciones CRUD - Alumnos</h4>
                     </div>       
                 </div>
 
                 <div id="lineaFooter"></div>
-                <p class="font-italic">actividad 5 - ©copyright</p>
+                <p class="font-italic">actividad 2 - ©copyright</p>
             </footer>
         </div>
 

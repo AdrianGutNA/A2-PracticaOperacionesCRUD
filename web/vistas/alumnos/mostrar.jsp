@@ -26,58 +26,71 @@
                             <img src="./publico/img/icono.png">
                         </div>
                         <div class="col">
-                            <h5>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h5>
+                            <h5>Actidad 2 - Operaciones CRUD - Alumnos</h5>
                         </div>       
                     </div>
                 </a>
             </nav>
-
             <div class="row" id="referencias">
-                <div class="col-8">
+                <div class="col-2">
                     <h3>
                         Alumnos:
                     </h3>
+
+                    <a class="btn btn-warning btnAtras" href="SAlumnos">Regresar al inicio</a>
+
                 </div>
-                <div class="col-4">
-                    <a  id="new" class="btn btn-success  " href="SAlumnos?accion=nuevo">Registrar alumno</a>
+                <div class="col-10">
+
+                    <div class="row">
+                        <div class="col-8">
+                        </div>
+                        <div class="col-4">
+                            <div id="btnNuevo">
+                                <a class="btn btn-success" href="SAlumnos?accion=nuevo">Registrar alumno</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table class="table" id="tabla">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Matricula</th>
+                                <th>Nombre Completo</th>
+                                <th>DDI</th>
+                                <th>DWI</th>
+                                <th>ECBD</th>
+                                <th>Promedio</th>
+                                <th colspan="2" >Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                DAOAlumno daoAlumno = new DAOAlumno();
+                                ArrayList<Alumno> listAlumnos = daoAlumno.mostrar();
+                                Alumno alumno = null;
+                                for (int i = 0; i < listAlumnos.size(); i++) {
+                                    alumno = listAlumnos.get(i);
+
+                            %>
+                            <tr>
+                                <td><%=alumno.getMatricula()%></td>
+                                <td><%=alumno.getNombre() + " " + alumno.getApellidos()%></td>
+                                <td><%=alumno.getDdi()%></td>
+                                <td><%=alumno.getDwi()%></td>
+                                <td><%=alumno.getEcbd()%></td>
+                                <td><%=alumno.promediar()%></td>
+                                <td><a class="btn btn-info" href="SAlumnos?accion=editar&matricula=<%=alumno.getMatricula()%>">Editar</a></td>
+                                <td><a class="btn btn-danger" href="SAlumnos?accion=eliminar&matricula=<%=alumno.getMatricula()%>">Eliminar</a></td>
+                            </tr>
+                            <% }%>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
-            
-            <table class="table" id="tabla">
-                <thead class="table-success">
-                    <tr>
-                    <th>Matricula</th>
-                    <th>Nombre Completo</th>
-                    <th>DDI</th>
-                    <th>DWI</th>
-                    <th>ECBD</th>
-                    <th>Promedio</th>
-                    <th colspan="2" >Opciones</th>
-                </tr>
-                </thead>
-               <tbody>
-                <%
-                    DAOAlumno daoAlumno = new DAOAlumno();
-                    ArrayList<Alumno> listAlumnos = daoAlumno.mostrar();
-                    Alumno alumno = null;
-                    for (int i = 0; i < listAlumnos.size(); i++) {
-                        alumno = listAlumnos.get(i);
 
-                %>
-                <tr>
-                    <td><%=alumno.getMatricula()%></td>
-                    <td><%=alumno.getNombre() + " " + alumno.getApellidos()%></td>
-                    <td><%=alumno.getDdi()%></td>
-                    <td><%=alumno.getDwi()%></td>
-                    <td><%=alumno.getEcbd()%></td>
-                    <td><%=alumno.promediar()%></td>
-                    <td><a class="btn btn-info" href="SAlumnos?accion=editar&matricula=<%=alumno.getMatricula()%>">Editar</a></td>
-                    <td><a class="btn btn-danger" href="SAlumnos?accion=eliminar&matricula=<%=alumno.getMatricula()%>">Eliminar</a></td>
-                </tr>
-                <% }%>
-            </tbody>
-            </table>
-            
             <footer>
                 <div class="row">
                     <div class="col-3">
@@ -85,12 +98,12 @@
                         <img src="./publico/img/UTlogo.png">
                     </div>
                     <div class="col">
-                        <h4>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h4>
+                        <h4>Actidad 2 - Operaciones CRUD - Alumnos</h4>
                     </div>       
                 </div>
 
                 <div id="lineaFooter"></div>
-                <p class="font-italic">actividad 5 - ©copyright</p>
+                <p class="font-italic">actividad 2 - ©copyright</p>
             </footer>
 
         </div>

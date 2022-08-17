@@ -2,10 +2,11 @@ package servlets;
 
 import beans.Alumno;
 import beans.Porcentaje;
-
+import beans.Actividad;
 
 import dao.DAOAlumno;
 import dao.DAOPorcentaje;
+import dao.DAOActividad;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -24,6 +25,10 @@ public class SAlumnos extends HttpServlet
     private String nuevoPorcentaje;
     private String editarPorcentaje;
     
+    private String mostrarActividad;
+    private String nuevoActividad;
+    private String editarActividad;
+    
     private String inicio;
     
     private String accion;
@@ -34,6 +39,9 @@ public class SAlumnos extends HttpServlet
     
     private Porcentaje porcentaje;
     private DAOPorcentaje daoPorcentaje;
+    
+    private Actividad actividad;
+    private DAOActividad daoActividad;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException  
@@ -48,6 +56,10 @@ public class SAlumnos extends HttpServlet
        nuevoPorcentaje   = "/vistas/porcentajes/nuevo.jsp";
        editarPorcentaje  = "/vistas/porcentajes/editar.jsp";
        mostrarPorcentaje = "/vistas/porcentajes/mostrar.jsp";
+       
+       nuevoActividad   = "/vistas/actividades/nuevo.jsp";
+       editarActividad  = "/vistas/actividades/editar.jsp";
+       mostrarActividad = "/vistas/actividades/mostrar.jsp";
        
        inicio  = "/vistas/index.jsp";
        acceso  = "";
@@ -147,26 +159,60 @@ public class SAlumnos extends HttpServlet
        }
        else if(accion!=null && accion.equalsIgnoreCase("mostrarActividades"))//Actividades
        {
-           acceso=mostrarPorcentaje;
+           acceso=mostrarActividad;
        }
        else if
-               (accion!=null && accion.equalsIgnoreCase("nuevoPorcentaje"))
+               (accion!=null && accion.equalsIgnoreCase("nuevoActividad"))
        {
-           acceso=nuevoPorcentaje;
+           acceso=nuevoActividad;
        }
-       else if(accion!=null && accion.equalsIgnoreCase("agregarPorcentaje"))
+       else if(accion!=null && accion.equalsIgnoreCase("agregarActividad"))
        {
-           porcentaje = new Porcentaje();
-           porcentaje.setDescripcion(request.getParameter("tfDescripcion"));
-           porcentaje.setPorcentaje(Integer.parseInt(request.getParameter("tfPorcentaje")));
+           actividad = new Actividad();
+           actividad.setActividad(request.getParameter("tfActividad"));
+           actividad.setCategoria(request.getParameter("tfCategoria"));
            
-           daoPorcentaje = new DAOPorcentaje();
-           daoPorcentaje.agregar(porcentaje);
+           daoActividad = new DAOActividad();
+           daoActividad.agregar(actividad);
            
+           acceso=mostrarActividad;
+           
+       }
+       else if(accion!=null && accion.equalsIgnoreCase("editarActividad"))
+       {
+          request.setAttribute("id", request.getParameter("id"));
+          acceso=editarActividad;
+       }else if(accion!=null && accion.equalsIgnoreCase("actualizarActividad"))
+       {
+           actividad = new Actividad();
+           String idOld= request.getParameter("tfIdOld");
+           actividad.setActividad(request.getParameter("tfActividad"));
+           actividad.setCategoria(request.getParameter("tfCategoria"));
+           
+           daoActividad = new DAOActividad();
+           daoActividad.editar(actividad, idOld);
+           acceso=mostrarActividad;
+           
+       }
+       else if(accion!=null && accion.equalsIgnoreCase("eliminarActividad"))
+       {
+           String id=request.getParameter("id");
+           daoActividad = new DAOActividad();
+           daoActividad.eliminar(id);
+           acceso=mostrarActividad;
+       }
+       else if(accion!=null && accion.equalsIgnoreCase("regresarPorcentaje"))
+       {
            acceso=mostrarPorcentaje;
-           
        }
-       
+       else if(accion!=null && accion.equalsIgnoreCase("regresarAlumno"))
+       {
+           acceso=mostrarAlumno;
+       }
+       else if(accion!=null && accion.equalsIgnoreCase("regresarActividad"))
+       {
+           acceso=mostrarActividad;
+       }
        else 
        {
            acceso=inicio;

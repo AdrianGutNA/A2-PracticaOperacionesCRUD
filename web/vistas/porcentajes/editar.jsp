@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Alumnos</title>
+        <title>Editar Porcentajes</title>
 
         <link rel="shortcut icon" href="./publico/img/libreta.ico" />
         <link rel="stylesheet" href="./publico/css/style.css">
@@ -22,7 +22,7 @@
                             <img src="./publico/img/icono.png">
                         </div>
                         <div class="col">
-                            <h5>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h5>
+                            <h5>Actidad 2 - Operaciones CRUD - Porcentajes</h5>
                         </div>       
                     </div>
                 </a>
@@ -32,18 +32,20 @@
                 <div class="col-4" id="referencias2">
 
                     <h3>
-                        Editar alumno:
+                        Editar Porcentaje:
                     </h3>
 
                     <br>
 
-                    <a class="btn btn-dark btnAtras" href="SAlumnos">Regresar</a>
-
+                    <form action="SAlumnos" method="POST">                       
+                        <button type="submit" name="accion" value="regresarPorcentaje" class="btn btn-dark btnAtras">Regresar</button>
+                    </form>
+                    
                 </div>
                 <div class="col-7">
                     <%
                         DAOPorcentaje dao = new DAOPorcentaje();
-                        String id =  request.getAttribute("id").toString();
+                        String id = request.getAttribute("id").toString();
                         Porcentaje porcentaje = dao.buscar(id);
                     %>
                     <form action="SAlumnos" method="POST">
@@ -69,12 +71,12 @@
                         <img src="./publico/img/UTlogo.png">
                     </div>
                     <div class="col">
-                        <h4>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h4>
+                        <h4>Actidad 2 - Operaciones CRUD - Porcentajes</h4>
                     </div>       
                 </div>
 
                 <div id="lineaFooter"></div>
-                <p class="font-italic">actividad 5 - ©copyright</p>
+                <p class="font-italic">actividad 2 - ©copyright</p>
             </footer>
         </div>
 

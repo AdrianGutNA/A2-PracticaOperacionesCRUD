@@ -21,7 +21,7 @@
                             <img src="./publico/img/icono.png">
                         </div>
                         <div class="col">
-                            <h5>Actidad 2 -Comunicacion entre JPS - Servlet - JSP</h5>
+                            <h5>Actidad 2 - Operaciones CRUD - Porcentajes</h5>
                         </div>       
                     </div>
                 </a>
@@ -35,8 +35,10 @@
                     </h3>
                      
                     <br>
-                    
-                    <a class="btn btn-dark btnAtras" href="SAlumnos">Regresar</a>
+
+                    <form action="SAlumnos" method="POST">                       
+                        <button type="submit" name="accion" value="regresarPorcentaje" class="btn btn-dark btnAtras">Regresar</button>
+                    </form>
                     
                 </div>
                 <div class="col-7">
@@ -62,7 +64,7 @@
                         <img src="./publico/img/UTlogo.png">
                     </div>
                     <div class="col">
-                        <h4>Actidad 2 -Comunicacion entre JPS - Servlet - JSP</h4>
+                        <h4>Actidad 2 - Operaciones CRUD - Porcentajes</h4>
                     </div>       
                 </div>
 

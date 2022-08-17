@@ -26,49 +26,63 @@
                             <img src="./publico/img/icono.png">
                         </div>
                         <div class="col">
-                            <h5>Actidad 2 -Comunicacion entre JPS - Servlet - JSP</h5>
+                            <h5>Actidad 2 - Operaciones CRUD - Porcentajes</h5>
                         </div>       
                     </div>
                 </a>
             </nav>
 
             <div class="row" id="referencias">
-                <div class="col-8">
+                <div class="col-2">
                     <h3>
-                        Porcentajes:
+                        Porcentajes
                     </h3>
+
+                    <a class="btn btn-warning btnAtras" href="SAlumnos">Regresar al inicio</a>
+
                 </div>
-                <div class="col-4">
-                    <a  id="new" class="btn btn-success  " href="SAlumnos?accion=nuevoPorcentaje">Registrar alumno</a>
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-8">
+                        </div>
+                        <div class="col-4">
+                            <div id="btnNuevo">
+                                <a  id="new" class="btn btn-success  " href="SAlumnos?accion=nuevoPorcentaje">Registrar porcentaje</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table" id="tabla">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Porcentaje</th>
+                                <th colspan="2" >Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
+                                ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
+                                Porcentaje porcentaje = null;
+                                for (int i = 0; i < listPorcentajes.size(); i++) {
+                                    porcentaje = listPorcentajes.get(i);
+                            %>
+                            <tr>
+                                <td><%=porcentaje.getDescripcion()%></td>
+                                <td><%=porcentaje.getPorcentaje()%></td>
+                                <td><a class="btn btn-info" href="SAlumnos?accion=editarPorcentaje&id=<%=porcentaje.getId()%>">Editar</a></td>
+                                <td><a class="btn btn-danger" href="SAlumnos?accion=eliminarPorcentaje&id=<%=porcentaje.getId()%>">Eliminar</a></td>
+                            </tr>
+                            <% }%>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
-            
-            <table class="table" id="tabla">
-                <thead class="table-success">
-                    <tr>
-                    <th>Descripción</th>
-                    <th>Porcentaje</th>
-                    <th colspan="2" >Opciones</th>
-                </tr>
-                </thead>
-               <tbody>
-                <%
-                    DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
-                    ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
-                    Porcentaje porcentaje = null;
-                    for (int i = 0; i < listPorcentajes.size(); i++) {
-                        porcentaje = listPorcentajes.get(i);
-                %>
-                <tr>
-                    <td><%=porcentaje.getDescripcion()%></td>
-                    <td><%=porcentaje.getPorcentaje()%></td>
-                    <td><a class="btn btn-info" href="SAlumnos?accion=editarPorcentaje&id=<%=porcentaje.getId()%>">Editar</a></td>
-                    <td><a class="btn btn-danger" href="SAlumnos?accion=eliminarPorcentaje&id=<%=porcentaje.getId()%>">Eliminar</a></td>
-                </tr>
-                <% }%>
-            </tbody>
-            </table>
-            
+
+
+
             <footer>
                 <div class="row">
                     <div class="col-3">
@@ -76,12 +90,12 @@
                         <img src="./publico/img/UTlogo.png">
                     </div>
                     <div class="col">
-                        <h4>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h4>
+                        <h4>Actidad 2 - Operaciones CRUD - Porcentajes</h4>
                     </div>       
                 </div>
 
                 <div id="lineaFooter"></div>
-                <p class="font-italic">actividad 5 - ©copyright</p>
+                <p class="font-italic">actividad 2 - ©copyright</p>
             </footer>
 
         </div>

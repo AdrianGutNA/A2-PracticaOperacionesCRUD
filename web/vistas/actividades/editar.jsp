@@ -1,11 +1,11 @@
-<%@page import="beans.Alumno"%>
-<%@page import="dao.DAOAlumno"%>
+<%@page import="beans.Actividad"%>
+<%@page import="dao.DAOActividad"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Alumnos</title>
+        <title>Editar Actividad</title>
 
         <link rel="shortcut icon" href="./publico/img/libreta.ico" />
         <link rel="stylesheet" href="./publico/css/style.css">
@@ -22,7 +22,7 @@
                             <img src="./publico/img/icono.png">
                         </div>
                         <div class="col">
-                            <h5>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h5>
+                            <h5>Actidad 2 - Operaciones CRUD - Actividades</h5>
                         </div>       
                     </div>
                 </a>
@@ -32,49 +32,34 @@
                 <div class="col-4" id="referencias2">
 
                     <h3>
-                        Editar alumno:
+                        Editar Actividad:
                     </h3>
 
                     <br>
 
-                    <a class="btn btn-dark btnAtras" href="SAlumnos">Regresar</a>
-
+                    <form action="SAlumnos" method="POST">                       
+                        <button type="submit" name="accion" value="regresarActividad" class="btn btn-dark btnAtras">Regresar</button>
+                    </form>
+                    
                 </div>
                 <div class="col-7">
                     <%
-                        DAOAlumno dao = new DAOAlumno();
-                        String matricula = request.getAttribute("matricula").toString();
-                        Alumno alumno = dao.buscar(matricula);
+                        DAOActividad dao = new DAOActividad();
+                        String id = request.getAttribute("id").toString();
+                        Actividad actividad = dao.buscar(id);
                     %>
                     <form action="SAlumnos" method="POST">
                         <div class="form-group">
-                            <label>Matricula</label>
-                            <input type="text"   class="form-control" name="tfMatricula" value="<%=alumno.getMatricula()%>"> 
+                            <label>Actividad</label>
+                            <input type="text"   class="form-control" name="tfActividad" value="<%=actividad.getActividad()%>"> 
                         </div>
                         <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text"   class="form-control" name="tfNombre" value="<%=alumno.getNombre()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>Apellidos</label>
-                            <input type="text"   class="form-control" name="tfApellidos" id="inputApellidos" value="<%=alumno.getApellidos()%>">
+                            <label>Categoria</label>
+                            <input type="text" class="form-control" name="tfCategoria" id="inputEcbd" value="<%=actividad.getCategoria()%>">
 
-                        </div>
-                        <div class="form-group">
-                            <label>DDI</label>
-                            <input type="number" class="form-control" name="tfDdi" id="inputddi" value="<%=alumno.getDdi()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>DWI</label>
-                            <input type="number" class="form-control" name="tfDwi" id="inputdwi" value="<%=alumno.getDwi()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>ECBD</label>
-                            <input type="number" class="form-control" name="tfEcbd" id="inputEcbd" value="<%=alumno.getEcbd()%>">
-
-                            <input type="hidden" class="form-control" name="tfMatriculaOld" id="inputMatri" value="<%=alumno.getMatricula()%>">
+                            <input type="hidden" class="form-control" name="tfIdOld" id="inputMatri" value="<%=id%>">
                         </div>                       
-                        <button type="submit" name="accion" value="Actualizar" class="btn btn-primary btnGuardar">Editar</button>
+                        <button type="submit" name="accion" value="actualizarActividad" class="btn btn-primary btnGuardar">Editar</button>
                     </form>
                 </div>
             </div>
@@ -86,12 +71,12 @@
                         <img src="./publico/img/UTlogo.png">
                     </div>
                     <div class="col">
-                        <h4>Actidad 5 -Comunicacion entre JPS - Servlet - JSP</h4>
+                        <h4>Actidad 2 - Operaciones CRUD - Actividades</h4>
                     </div>       
                 </div>
 
                 <div id="lineaFooter"></div>
-                <p class="font-italic">actividad 5 - ©copyright</p>
+                <p class="font-italic">actividad 2 - ©copyright</p>
             </footer>
         </div>
 
