@@ -17,7 +17,7 @@
     </head>
     <body>
 
-        <div id="content">
+        <div id="contenedor">
 
             <nav class="navbar navbar-dark bg-dark" id="navBar">
                 <a class="navbar-brand">
@@ -38,7 +38,7 @@
                         Actividades:
                     </h3>
 
-                    <a class="btn btn-warning btnAtras" href="SAlumnos">Regresar al inicio</a>
+                    <a class="btn btn-outline-dark btnAtras" href="SAlumnos">Regresar</a>
 
                 </div>
                 <div class="col-10">

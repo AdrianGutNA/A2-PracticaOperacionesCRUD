@@ -1,10 +1,16 @@
+<%@page import="beans.Alumno"%>
+<%@page import="dao.DAOAlumno"%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="beans.Actividad"%>
+<%@page import="dao.DAOActividad"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- CSS only -->
-        <title>Nuevo Alumno</title>
+        <title>Editar Alumnos</title>
 
         <link rel="shortcut icon" href="./publico/img/libreta.ico" />
         <link rel="stylesheet" href="./publico/css/style.css">
@@ -30,45 +36,48 @@
             <div class="row">
                 <div class="col-4" id="referencias2">
 
+                    <%
+                        DAOAlumno dao = new DAOAlumno();
+                        String matricula = request.getAttribute("matricula").toString();
+                        Alumno alumno = dao.buscar(matricula);
+                    %>
+
                     <h3>
-                        Registrar nuevos alumnos:
+                        Asignar Califificacion al Alumno:
                     </h3>
 
-                    <br>
+                    <h3>
+                        <%=alumno.getNombre()%>
+                    </h3>
 
                     <form action="SAlumnos" method="POST">                       
                         <button type="submit" name="accion" value="regresarAlumno" class="btn btn-outline-dark btnAtras">Regresar</button>
-                    </form> 
-                    
+                    </form>
+
                 </div>
                 <div class="col-7">
-                    <form action="SAlumnos" method="POST">
-                        <div class="form-group">
-                            <label>Matricula</label>
-                            <input type="text" class="form-control" name="tfMatricula">
-                        </div>
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" class="form-control" name="tfNombre">
-                        </div>
-                        <div class="form-group">
-                            <label>Apellidos</label>
-                            <input type="text" class="form-control" name="tfApellidos">
-                        </div>
-                        <div class="form-group">
-                            <label>DDI</label>
-                            <input type="text" class="form-control" name="tfDdi">
-                        </div>
-                        <div class="form-group">
-                            <label>DWI</label>
-                            <input type="text" class="form-control" name="tfDwi">
-                        </div>
-                        <div class="form-group">
-                            <label>ECBD</label>
-                            <input type="text" class="form-control" name="tfEcbd">
-                        </div>
 
-                        <button type="submit" name="accion" value="agregar" class="btn-fm btn-primary btnGuardar">Guardar</button>
+                    <form action="SAlumnos" method="POST">
+
+                        <input type="hidden" class="form-control" name="tfMatriculaOld" id="inputMatri" value="<%=alumno.getMatricula()%>">
+
+                        <%
+                            DAOActividad daoActividad = new DAOActividad();
+                            ArrayList<Actividad> listActividades = daoActividad.mostrar();
+                            Actividad actividad = null;
+                            for (int i = 0; i < listActividades.size(); i++) {
+                                actividad = listActividades.get(i);
+
+                        %>
+                        <div class="form-group">
+                            <label><%=actividad.getActividad()%></label>
+                            <input type="number" class="form-control" name="<%=actividad.getActividad()%>">
+                        </div> 
+
+
+                        <% }%>
+
+                        <button type="submit" name="accion" value="Actualizar" class="btn btn-primary btnGuardar">Editar</button>
                     </form>
                 </div>
             </div>
@@ -88,5 +97,6 @@
                 <p class="font-italic">actividad 2 - ©copyright</p>
             </footer>
         </div>
+
     </body>
 </html>

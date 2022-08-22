@@ -20,6 +20,8 @@ public class SAlumnos extends HttpServlet
     private String mostrarAlumno;
     private String nuevoAlumno;
     private String editarAlumno;
+    private String asignarCalif;
+    private String verCalif;
     
     private String mostrarPorcentaje;
     private String nuevoPorcentaje;
@@ -52,10 +54,12 @@ public class SAlumnos extends HttpServlet
        nuevoAlumno   = "/vistas/alumnos/nuevo.jsp";
        editarAlumno  = "/vistas/alumnos/editar.jsp";
        mostrarAlumno = "/vistas/alumnos/mostrar.jsp";
+       asignarCalif  = "/vistas/alumnos/asignar.jsp";
+       verCalif      = "/vistas/alumnos/verAlumno.jsp";
        
        nuevoPorcentaje   = "/vistas/porcentajes/nuevo.jsp";
        editarPorcentaje  = "/vistas/porcentajes/editar.jsp";
-       mostrarPorcentaje = "/vistas/porcentajes/mostrar.jsp";
+       mostrarPorcentaje = "/vistas/plantilla.jsp";
        
        nuevoActividad   = "/vistas/actividades/nuevo.jsp";
        editarActividad  = "/vistas/actividades/editar.jsp";
@@ -113,6 +117,15 @@ public class SAlumnos extends HttpServlet
            daoAlumno = new DAOAlumno();
            daoAlumno.eliminar(matricula);
            acceso=mostrarAlumno;
+       }else if(accion!=null && accion.equalsIgnoreCase("verCalif"))
+       {
+          request.setAttribute("matricula", request.getParameter("matricula"));
+          acceso=verCalif;
+       }
+       else if(accion!=null && accion.equalsIgnoreCase("asignarCalif"))
+       {
+          request.setAttribute("matricula", request.getParameter("matricula"));
+          acceso=asignarCalif;
        }
        else if(accion!=null && accion.equalsIgnoreCase("mostrarPorcentaje"))//Porcentaje
        {

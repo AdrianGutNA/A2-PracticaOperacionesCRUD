@@ -17,7 +17,7 @@
     </head>
     <body>
 
-        <div id="content">
+        <div id="contenedor">
 
             <nav class="navbar navbar-dark bg-dark" id="navBar">
                 <a class="navbar-brand">
@@ -37,7 +37,7 @@
                         Alumnos:
                     </h3>
 
-                    <a class="btn btn-warning btnAtras" href="SAlumnos">Regresar al inicio</a>
+                    <a class="btn btn-outline-dark btnAtras" href="SAlumnos">Regresar</a>
 
                 </div>
                 <div class="col-10">
@@ -58,10 +58,7 @@
                             <tr>
                                 <th>Matricula</th>
                                 <th>Nombre Completo</th>
-                                <th>DDI</th>
-                                <th>DWI</th>
-                                <th>ECBD</th>
-                                <th>Promedio</th>
+                                <th>Calificaciones</th>
                                 <th colspan="2" >Opciones</th>
                             </tr>
                         </thead>
@@ -77,10 +74,7 @@
                             <tr>
                                 <td><%=alumno.getMatricula()%></td>
                                 <td><%=alumno.getNombre() + " " + alumno.getApellidos()%></td>
-                                <td><%=alumno.getDdi()%></td>
-                                <td><%=alumno.getDwi()%></td>
-                                <td><%=alumno.getEcbd()%></td>
-                                <td><%=alumno.promediar()%></td>
+                                <td><a class="btn btn-success" href="SAlumnos?accion=verCalif&matricula=<%=alumno.getMatricula()%>">Asignar</a></td>
                                 <td><a class="btn btn-info" href="SAlumnos?accion=editar&matricula=<%=alumno.getMatricula()%>">Editar</a></td>
                                 <td><a class="btn btn-danger" href="SAlumnos?accion=eliminar&matricula=<%=alumno.getMatricula()%>">Eliminar</a></td>
                             </tr>
