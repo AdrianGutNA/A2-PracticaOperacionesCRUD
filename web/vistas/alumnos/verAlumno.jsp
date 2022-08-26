@@ -103,13 +103,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            <% for (int x = 0; x < listActividades.size(); x++) {
+                                                    actividad = listActividades.get(x);
+                                                    String act = actividad.getCategoria();
+                                            %>
                                             <tr>
-                                                <td>0</td>
-                                                <td>0</td>
+                                                <td><%=x%></td>
+                                                <td><%=actividad.getActividad()%></td>
                                                 <td>0</td>
                                             </tr>
-
+                                            <% };
+                                            %>
                                         </tbody>
                                     </table>
                                 </div>

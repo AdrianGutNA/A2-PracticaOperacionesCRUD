@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="beans.Porcentaje"%>
+<%@page import="dao.DAOPorcentaje"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +16,17 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </head>
     <body>
+        <%
+            DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
+            ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
+            Porcentaje porcentaje = null;
+            int total = 0;
+            for (int i = 0; i < listPorcentajes.size(); i++) {
+                porcentaje = listPorcentajes.get(i);
+                total = total + porcentaje.getPorcentaje();
+            }
+            
+        %>
         <div id="contenedor">
 
             <nav class="navbar navbar-dark bg-dark" id="navBar">
@@ -52,11 +66,16 @@
                                 <label>Porcentaje</label>
                                 <input type="number" class="form-control" name="tfPorcentaje">
                             </div>
-
+                            <% if (total < 100) {%>
                             <button type="submit" name="accion" value="agregarPorcentaje" class="btn-fm btn-primary btnGuardar">Guardar</button>
+                            <%}%>
                         </form>
+                        <br><br>
+                        <h5>Porcentaje asignado: <%=total%>%</h5>
                     </div>
                 </div>
+
+
             </div>
             <footer>
                 <div class="row">

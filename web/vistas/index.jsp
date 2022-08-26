@@ -36,20 +36,16 @@
             <div id="mainIndex">
                 <div class="row" id="menuIndex">
                     <div class="col">
-                        <form action="SAlumnos" method="POST">
+                        <div class="card" style="width: 14rem;">
+                            <img src="./publico/img/alumno.png">
 
-                            <div class="card" style="width: 14rem;">
-                                <img src="./publico/img/alumno.png">
+                            <div class="card-body">
+                                <form action="SAlumnos" method="POST">                       
+                                    <button type="submit" name="accion" value="mostrar" class="btn btn-outline-dark btnIndexMenu">Alumnos</button>
+                                </form>
+                            </div> 
 
-                                <div class="card-body">
-                                    <form action="SAlumnos" method="POST">                       
-                                        <button type="submit" name="accion" value="mostrar" class="btn btn-outline-dark btnIndexMenu">Alumnos</button>
-                                    </form>
-                                </div> 
-
-                            </div>
-
-                        </form>
+                        </div>
                     </div>
                     <div class="col-1"></div>
                     <div class="col">
@@ -66,18 +62,16 @@
                     </div>
                     <div class="col-1"></div>
                     <div class="col">
-                        <a href="SAlumnos?accion=mostrarPorcentaje">
-                            <div class="card" style="width: 14rem;">
-                                <img src="./publico/img/porcentaje.png">
+                        <div class="card" style="width: 14rem;">
+                            <img src="./publico/img/porcentaje.png">
 
-                                <div class="card-body">
-                                    <form action="SAlumnos" method="POST">                       
-                                        <button type="submit" name="accion" value="mostrarPorcentaje" class="btn btn-outline-dark btnIndexMenu">Porcentajes</button>
-                                    </form>                                
-                                </div> 
-                                
-                            </div>
-                        </a>
+                            <div class="card-body">
+                                <form action="SAlumnos" method="POST">                       
+                                    <button type="submit" name="accion" value="mostrarPorcentaje" class="btn btn-outline-dark btnIndexMenu">Porcentajes</button>
+                                </form>                                
+                            </div> 
+
+                        </div>
                     </div>
                 </div>
 
@@ -86,7 +80,7 @@
                 </form>
 
             </div>
-            
+
             <footer>
                 <div class="row">
                     <div class="col-3">

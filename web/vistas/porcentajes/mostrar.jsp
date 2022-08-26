@@ -58,8 +58,10 @@
                                     DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
                                     ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
                                     Porcentaje porcentaje = null;
+                                    int total = 0;
                                     for (int i = 0; i < listPorcentajes.size(); i++) {
                                         porcentaje = listPorcentajes.get(i);
+                                        total = total + porcentaje.getPorcentaje();
                                 %>
                                 <tr>
                                     <td><%=porcentaje.getDescripcion()%></td>
@@ -70,7 +72,8 @@
                                 <% }%>
                             </tbody>
                         </table>
-
+                            
+                            <h5>Porcentaje asignado: <%=total%>%</h5>
                     </div>
                     <div class="col-1">
                         <div id="btnRegistrar">
