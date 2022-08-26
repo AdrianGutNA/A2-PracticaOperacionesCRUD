@@ -9,6 +9,7 @@
 
         <link rel="shortcut icon" href="./publico/img/libreta.ico" />
         <link rel="stylesheet" href="./publico/css/style.css">
+        <link rel="stylesheet" href="./publico/css/styleAlumnos.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </head>
@@ -27,60 +28,49 @@
                     </div>
                 </a>
             </nav>
+            <div id="main">
+                <div class="row">
+                    <div class="col-4" id="referencias2">
 
-            <div class="row">
-                <div class="col-4" id="referencias2">
+                        <h3>
+                            Editar alumno:
+                        </h3>
 
-                    <h3>
-                        Editar alumno:
-                    </h3>
+                        <br>
 
-                    <br>
+                        <form action="SAlumnos" method="POST">                       
+                            <button type="submit" name="accion" value="regresarAlumno" class="btn btn-outline-dark btnAtras">Regresar</button>
+                        </form>
 
-                    <form action="SAlumnos" method="POST">                       
-                        <button type="submit" name="accion" value="regresarAlumno" class="btn btn-outline-dark btnAtras">Regresar</button>
-                    </form>
-                    
-                </div>
-                <div class="col-7">
-                    <%
-                        DAOAlumno dao = new DAOAlumno();
-                        String matricula = request.getAttribute("matricula").toString();
-                        Alumno alumno = dao.buscar(matricula);
-                    %>
-                    <form action="SAlumnos" method="POST">
-                        <div class="form-group">
-                            <label>Matricula</label>
-                            <input type="text"   class="form-control" name="tfMatricula" value="<%=alumno.getMatricula()%>"> 
-                        </div>
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text"   class="form-control" name="tfNombre" value="<%=alumno.getNombre()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>Apellidos</label>
-                            <input type="text"   class="form-control" name="tfApellidos" id="inputApellidos" value="<%=alumno.getApellidos()%>">
+                    </div>
+                    <div class="col-5">
+                        <%
+                            DAOAlumno dao = new DAOAlumno();
+                            String matricula = request.getAttribute("matricula").toString();
+                            Alumno alumno = dao.buscar(matricula);
+                        %>
+                        <form action="SAlumnos" method="POST">
+                            <div class="form-group">
+                                <label>Matricula</label>
+                                <input type="text"   class="form-control" name="tfMatricula" value="<%=alumno.getMatricula()%>"> 
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text"   class="form-control" name="tfNombre" value="<%=alumno.getNombre()%>">
+                            </div>
+                            <div class="form-group">
+                                <label>Apellidos</label>
+                                <input type="text"   class="form-control" name="tfApellidos" id="inputApellidos" value="<%=alumno.getApellidos()%>">
 
-                        </div>
-                        <div class="form-group">
-                            <label>DDI</label>
-                            <input type="number" class="form-control" name="tfDdi" id="inputddi" value="<%=alumno.getDdi()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>DWI</label>
-                            <input type="number" class="form-control" name="tfDwi" id="inputdwi" value="<%=alumno.getDwi()%>">
-                        </div>
-                        <div class="form-group">
-                            <label>ECBD</label>
-                            <input type="number" class="form-control" name="tfEcbd" id="inputEcbd" value="<%=alumno.getEcbd()%>">
+                            </div>
 
                             <input type="hidden" class="form-control" name="tfMatriculaOld" id="inputMatri" value="<%=alumno.getMatricula()%>">
-                        </div>                       
-                        <button type="submit" name="accion" value="Actualizar" class="btn btn-primary btnGuardar">Editar</button>
-                    </form>
+
+                            <button type="submit" name="accion" value="Actualizar" class="btn btn-primary btnGuardar">Editar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
             <footer>
                 <div class="row">
                     <div class="col-3">

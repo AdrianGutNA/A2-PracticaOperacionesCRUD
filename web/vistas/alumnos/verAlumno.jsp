@@ -18,6 +18,7 @@
 
         <link rel="shortcut icon" href="./publico/img/libreta.ico" />
         <link rel="stylesheet" href="./publico/css/style.css">
+        <link rel="stylesheet" href="./publico/css/styleAlumnos.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </head>
@@ -36,92 +37,91 @@
                     </div>
                 </a>
             </nav>
+            <div id="main">
+                <div class="row" >
+                    <div class="col-3" id="referencias2">
 
-            <div class="row">
-                <div class="col-4" id="referencias2">
+                        <%
+                            DAOAlumno dao = new DAOAlumno();
+                            String matricula = request.getAttribute("matricula").toString();
+                            Alumno alumno = dao.buscar(matricula);
+                        %>
 
-                    <%
-                        DAOAlumno dao = new DAOAlumno();
-                        String matricula = request.getAttribute("matricula").toString();
-                        Alumno alumno = dao.buscar(matricula);
-                    %>
+                        <h3>
+                            Asignar Calificación al Alumno:
+                        </h3>
 
-                    <h3>
-                        Asignar Califificacion al Alumno:
-                    </h3>
+                        <h3>
+                            <%=alumno.getNombre()%>
+                        </h3>
 
-                    <h3>
-                        <%=alumno.getNombre()%>
-                    </h3>
 
-                    <a class="btn btn-success" id="btnAtras2" href="SAlumnos?accion=asignarCalif&matricula=<%=alumno.getMatricula()%>">Asignar</a>
+                        <form action="SAlumnos" method="POST">                       
+                            <button type="submit" name="accion" value="regresarAlumno" class="btn btn-outline-dark btnAtrasAlumnos">Regresar</button>
+                        </form>
 
-                    <form action="SAlumnos" method="POST">                       
-                        <button type="submit" name="accion" value="regresarAlumno" class="btn btn-outline-dark btnAtrass">Regresar</button>
-                    </form>
+                    </div>
+                    <div class="col-8">
+                        <div id="tablasCalif">
 
-                </div>
-                <div class="col-7">
+                            <%
+                                DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
+                                ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
+                                Porcentaje porcentaje = null;
 
-                    <%
-                        DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
-                        ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
-                        Porcentaje porcentaje = null;
+                                DAOActividad daoActividad = new DAOActividad();
+                                ArrayList<Actividad> listActividades = daoActividad.mostrar();
+                                Actividad actividad = null;
 
-                        DAOActividad daoActividad = new DAOActividad();
-                        ArrayList<Actividad> listActividades = daoActividad.mostrar();
-                        Actividad actividad = null;
+                                for (int i = 0; i < listPorcentajes.size(); i++) {
+                                    porcentaje = listPorcentajes.get(i);
 
-                        for (int i = 0; i < listPorcentajes.size(); i++) {
-                            porcentaje = listPorcentajes.get(i);
+                            %>
 
-                    %>
-
-                    <br>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-8">
-                                    <%=porcentaje.getDescripcion()%>
+                            <br>
+                            <div class="card ">
+                                <div class="card-header bg-warning">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <%=porcentaje.getDescripcion()%>
+                                        </div>
+                                        <div class="col-3">
+                                            Porcentaje: <%=porcentaje.getPorcentaje()%>
+                                        </div>
+                                        <div class="col-3">
+                                            <a class="btn btn-light btn-sm" id="btnAtras2" href="SAlumnos?accion=asignarCalif&matricula=<%=alumno.getMatricula()%>">Asignar calif.</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <diV class="col-4">
-                                    Porcentaje: <%=porcentaje.getPorcentaje()%>
-                                </diV>
+                                <div class="card-body">
+                                    <table class="table" id="tablaCalifAlumnos">
+                                        <thead class="table-warning">
+                                            <tr>
+                                                <th scope="col-1">No.</th>
+                                                <th scope="col">Actividad</th>
+                                                <th scope="col-1">Calif</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No.</th>
-                                        <th scope="col">Actividad</th>
-                                        <th scope="col">Cal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>8</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+
+                            <% }%>
+
                         </div>
                     </div>
-
-
-                    <% }%>
-
-
                 </div>
             </div>
-
             <footer>
                 <div class="row">
                     <div class="col-3">

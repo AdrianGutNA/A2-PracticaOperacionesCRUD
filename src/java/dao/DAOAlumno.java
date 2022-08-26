@@ -29,10 +29,6 @@ public class DAOAlumno
           alumno.setMatricula(rs.getString("Matricula"));
           alumno.setNombre(rs.getString("Nombre"));
           alumno.setApellidos(rs.getString("Apellidos"));
-          alumno.setDdi(rs.getInt("Ddi"));
-          alumno.setDwi(rs.getInt("Dwi"));
-          alumno.setEcbd(rs.getInt("Ecbd"));
-          alumno.promediar();
           list.add(alumno);
       }
       rs.close();
@@ -48,10 +44,7 @@ public class DAOAlumno
    String sql = "INSERT INTO alumnos VALUES('"  +
                  alumno.getMatricula()  + "'," + 
            "'" + alumno.getNombre()     + "'," +
-           "'" + alumno.getApellidos()  + "'," +
-                 alumno.getDdi()        + ","  +
-                 alumno.getDwi()        + ","  +
-                 alumno.getEcbd()       + ")";
+           "'" + alumno.getApellidos()  + "')";
    
    try
    {
@@ -70,10 +63,7 @@ public class DAOAlumno
      String sql="UPDATE alumnos SET " +
             " Matricula  = '" + alumno.getMatricula()  + "',"  +
             " Nombre     = '" + alumno.getNombre()     + "'," +
-            " Apellidos  = '" + alumno.getApellidos()  + "'," +
-            " Ddi        = "  + alumno.getDdi()        + ","  +
-            " Dwi        = "  + alumno.getDwi()        + ","  +
-            " Ecbd        = " + alumno.getEcbd()       +
+            " Apellidos  = '" + alumno.getApellidos()  + "' " +
             " WHERE Matricula = '" + old + "'";
      
      try

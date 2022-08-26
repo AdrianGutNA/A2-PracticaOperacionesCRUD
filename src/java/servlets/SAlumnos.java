@@ -32,6 +32,7 @@ public class SAlumnos extends HttpServlet
     private String editarActividad;
     
     private String inicio;
+    private String cerrarSesion;
     
     private String accion;
     private String acceso;
@@ -59,13 +60,14 @@ public class SAlumnos extends HttpServlet
        
        nuevoPorcentaje   = "/vistas/porcentajes/nuevo.jsp";
        editarPorcentaje  = "/vistas/porcentajes/editar.jsp";
-       mostrarPorcentaje = "/vistas/plantilla.jsp";
+       mostrarPorcentaje = "/vistas/porcentajes/mostrar.jsp";
        
        nuevoActividad   = "/vistas/actividades/nuevo.jsp";
        editarActividad  = "/vistas/actividades/editar.jsp";
        mostrarActividad = "/vistas/actividades/mostrar.jsp";
        
        inicio  = "/vistas/index.jsp";
+       cerrarSesion = "/vistas/login.jsp";
        acceso  = "";
        
        accion=request.getParameter("accion");
@@ -83,9 +85,6 @@ public class SAlumnos extends HttpServlet
            alumno.setMatricula(request.getParameter("tfMatricula"));
            alumno.setNombre(request.getParameter("tfNombre"));
            alumno.setApellidos(request.getParameter("tfApellidos"));
-           alumno.setDdi(Integer.parseInt(request.getParameter("tfDdi")));
-           alumno.setDwi(Integer.parseInt(request.getParameter("tfDwi")));
-           alumno.setEcbd(Integer.parseInt(request.getParameter("tfEcbd")));
            
            daoAlumno = new DAOAlumno();
            daoAlumno.agregar(alumno);
@@ -104,9 +103,6 @@ public class SAlumnos extends HttpServlet
            alumno.setMatricula(request.getParameter("tfMatricula"));
            alumno.setNombre(request.getParameter("tfNombre"));
            alumno.setApellidos(request.getParameter("tfApellidos"));
-           alumno.setDdi(Integer.parseInt(request.getParameter("tfDdi")));
-           alumno.setDwi(Integer.parseInt(request.getParameter("tfDwi")));
-           alumno.setEcbd(Integer.parseInt(request.getParameter("tfEcbd")));
            
            daoAlumno = new DAOAlumno();
            daoAlumno.editar(alumno, matriculaOld);
@@ -225,6 +221,9 @@ public class SAlumnos extends HttpServlet
        else if(accion!=null && accion.equalsIgnoreCase("regresarActividad"))
        {
            acceso=mostrarActividad;
+       }else if(accion!=null && accion.equalsIgnoreCase("cerrarSesion"))
+       {
+           acceso=cerrarSesion;
        }
        else 
        {
