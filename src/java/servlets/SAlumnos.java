@@ -116,7 +116,7 @@ public class SAlumnos extends HttpServlet {
         } else if (accion != null && accion.equalsIgnoreCase("nuevoPorcentaje")) {
             acceso = nuevoPorcentaje;
         } else if (accion != null && accion.equalsIgnoreCase("agregarPorcentaje")) {
-            
+
             DAOPorcentaje daoPor = new DAOPorcentaje();
             ArrayList<Porcentaje> listPorcentajes = daoPor.mostrar();
             Porcentaje por = null;
@@ -129,33 +129,51 @@ public class SAlumnos extends HttpServlet {
             porcentaje = new Porcentaje();
             porcentaje.setDescripcion(request.getParameter("tfDescripcion"));
             porcentaje.setPorcentaje(Integer.parseInt(request.getParameter("tfPorcentaje")));
-            
-            int subTotal = porcentaje.getPorcentaje() + total;
-            if(subTotal > 100){
-                
-                            acceso = nuevoPorcentaje;
-            }
-            else
-            {
-            
-            daoPorcentaje = new DAOPorcentaje();
-            daoPorcentaje.agregar(porcentaje);
 
-            acceso = mostrarPorcentaje;
+            int subTotal = porcentaje.getPorcentaje() + total;
+            if (subTotal > 100) {
+
+                acceso = nuevoPorcentaje;
+            } else {
+
+                daoPorcentaje = new DAOPorcentaje();
+                daoPorcentaje.agregar(porcentaje);
+
+                acceso = mostrarPorcentaje;
             }
 
         } else if (accion != null && accion.equalsIgnoreCase("editarPorcentaje")) {
             request.setAttribute("id", request.getParameter("id"));
             acceso = editarPorcentaje;
         } else if (accion != null && accion.equalsIgnoreCase("actualizarPorcentaje")) {
+
+            DAOPorcentaje daoPorc = new DAOPorcentaje();
+            ArrayList<Porcentaje> listPorcentajes = daoPorc.mostrar();
+            Porcentaje porc = null;
+            int total = 0;
+            for (int i = 0; i < listPorcentajes.size(); i++) {
+                porc = listPorcentajes.get(i);
+                total = total + porc.getPorcentaje();
+            }
+
             porcentaje = new Porcentaje();
             String idOld = request.getParameter("tfIdOld");
+            String porAnterior = request.getParameter("porcentajeAnterior");
             porcentaje.setDescripcion(request.getParameter("tfDescripcion"));
             porcentaje.setPorcentaje(Integer.parseInt(request.getParameter("tfPorcentaje")));
 
-            daoPorcentaje = new DAOPorcentaje();
-            daoPorcentaje.editar(porcentaje, idOld);
-            acceso = mostrarPorcentaje;
+            int porcentajeAnterior = Integer.parseInt(porAnterior);
+            int subTotal2 = total - porcentajeAnterior;
+            int subTotal = subTotal2 + porcentaje.getPorcentaje();
+
+            if (subTotal <= 100) {
+                daoPorcentaje = new DAOPorcentaje();
+                daoPorcentaje.editar(porcentaje, idOld);
+                acceso = mostrarPorcentaje;
+            } else {
+                request.setAttribute("id", request.getParameter("tfIdOld"));
+                acceso = editarPorcentaje;
+            }
 
         } else if (accion != null && accion.equalsIgnoreCase("eliminarPorcentaje")) {
             String id = request.getParameter("id");

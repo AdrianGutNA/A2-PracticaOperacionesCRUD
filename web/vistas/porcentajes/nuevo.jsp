@@ -68,10 +68,16 @@
                             </div>
                             <% if (total < 100) {%>
                             <button type="submit" name="accion" value="agregarPorcentaje" class="btn-fm btn-primary btnGuardar">Guardar</button>
+                            <%} else {%>
+                            <h5>
+                                ->¡Ya se registró el porcetaje maximo!
+                            </h5>    
                             <%}%>
                         </form>
                         <br><br>
-                        <h5>Porcentaje asignado: <%=total%>%</h5>
+                        <h4>Porcentaje ya asignado: <%=total%>%</h4>
+                        <br>
+                        <h5>Prcentaje por asignar: <%=100-total%>%</h5>
                     </div>
                 </div>
 

@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="beans.Porcentaje"%>
 <%@page import="dao.DAOPorcentaje"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,6 +15,17 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </head>
     <body>
+        <%
+            DAOPorcentaje daoPorcentaje = new DAOPorcentaje();
+            ArrayList<Porcentaje> listPorcentajes = daoPorcentaje.mostrar();
+            Porcentaje por = null;
+            int Porcentajetotal = 0;
+            for (int i = 0; i < listPorcentajes.size(); i++) {
+                por = listPorcentajes.get(i);
+                Porcentajetotal = Porcentajetotal + por.getPorcentaje();
+            }
+                        
+        %>
         <div id="contenedor">
 
             <nav class="navbar navbar-dark bg-dark" id="navBar">
@@ -49,6 +61,10 @@
                             DAOPorcentaje dao = new DAOPorcentaje();
                             String id = request.getAttribute("id").toString();
                             Porcentaje porcentaje = dao.buscar(id);
+                            
+                            int subTotal = 100-Porcentajetotal;
+                            
+                            int total = subTotal + porcentaje.getPorcentaje();
                         %>
                         <form action="SAlumnos" method="POST">
                             <div class="form-group">
@@ -56,13 +72,20 @@
                                 <input type="text"   class="form-control" name="tfDescripcion" value="<%=porcentaje.getDescripcion()%>"> 
                             </div>
                             <div class="form-group">
-                                <label>Porcentaje</label>
+                                <label>Porcentaje Actual</label>
                                 <input type="number" class="form-control" name="tfPorcentaje" id="inputEcbd" value="<%=porcentaje.getPorcentaje()%>">
 
                                 <input type="hidden" name="tfIdOld" value="<%=id%>">
+                                <input type="hidden" name="porcentajeAnterior" value="<%=porcentaje.getPorcentaje()%>">
+
                             </div>                       
                             <button type="submit" name="accion" value="actualizarPorcentaje" class="btn btn-primary btnGuardar">Editar</button>
                         </form>
+                            <br><br>
+                        <h4>Porcentaje ya asignado: <%=Porcentajetotal - porcentaje.getPorcentaje()%>%</h4>
+                        <br>
+                        <h5>Prcentaje asignable: hasta <%=total%>%</h5>
+                   
                     </div>
                 </div>
             </div>
